@@ -10,8 +10,8 @@ public:
     Person();
     Person(int, int);
     //Person(Person& copyPerson);
-    int getArrivalTime();
-    int getProcessTime();
+    int getArrivalTime() const;
+    int getProcessTime() const;
 
     void setArrivalTime(int newATime);
     void setProcessTime(int newPTime);
