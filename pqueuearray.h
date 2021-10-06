@@ -1,5 +1,6 @@
 #ifndef P_QUEUE_ARRAY
 #define P_QUEUE_ARRAY
+#include "queueinterface.h"
 
 template<class ItemType>
 class PQueueArray : public QueueInterface<ItemType> {
@@ -14,5 +15,5 @@ public:
     ItemType peekFront() const;
     ~PQueueArray() { }
 };
-#include "pqueuearray.cpp"
+//#include "pqueuearray.cpp"
 #endif

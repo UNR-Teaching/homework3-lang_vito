@@ -1,3 +1,5 @@
+#include "pqueuearray.h"
+
 PQueueArray::PQueueArray() {
     itemCount = frontIndex = backIndex = 0;
 }
