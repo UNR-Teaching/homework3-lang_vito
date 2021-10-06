@@ -12,11 +12,11 @@ Person::Person(int newArrival, int newProcess) {
     processTime = newProcess;
 }
 
-int Person::getArrivalTime() {
+int Person::getArrivalTime() const {
     return arrivalTime;
 }
 
-int Person::getProcessTime() {
+int Person::getProcessTime() const {
     return processTime;
 }
 
