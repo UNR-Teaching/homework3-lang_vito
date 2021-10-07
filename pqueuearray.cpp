@@ -45,7 +45,7 @@ template<class ItemType>
 bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
     if (!isFull()) {
         for (int i = 0, i < itemCount; i++) {
-            if (newEntry < queue[i]) {
+            if (newEntry <= queue[i]) {
                 ItemType tempEntry = queue[i];
                 queue[i] = newEntry;
 
