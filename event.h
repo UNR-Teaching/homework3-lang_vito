@@ -20,6 +20,9 @@ public:
     void setProcessTime(int newPTime);
     void setDepartureTime(int newDTime);
     void setEventType(bool event);
+
+    bool operator<=(const Event& compareEvent);
+    bool operator>(const Event& compareEvent);
 };
 
 #endif

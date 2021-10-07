@@ -6,7 +6,7 @@ template<class ItemType>
 class PQueueArray : public QueueInterface<ItemType> {
 private:
     static const int DEFAULT_SIZE = 50;
-    int itemCount, maxSize, frontIndex, backIndex;
+    int itemCount, maxSize = DEFAULT_SIZE, frontIndex, backIndex;
     ItemType queue[DEFAULT_SIZE];
 public:
     PQueueArray();
