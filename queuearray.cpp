@@ -12,6 +12,15 @@ QueueArray<ItemType>::QueueArray(int newSize) {
 }
 
 template<class ItemType>
+QueueArray<ItemType>::QueueArray(const QueueArray& oldQueue) {
+    frontIndex = oldQueue.frontIndex;
+    while(!oldQueue.isEmpty()) {
+        enqueue(oldQueue.peekFront());
+        oldQueue.dequeue();
+    }
+}
+
+template<class ItemType>
 bool QueueArray<ItemType>::isEmpty() const {
     if (itemCount == 0)
         return true;
@@ -56,6 +65,7 @@ template<class ItemType>
 ItemType QueueArray<ItemType>::peekFront() const {
     if (isEmpty()) {
         // return null or error
+        return NULL;
     }
     else
         return queue[frontIndex];
