@@ -1,3 +1,5 @@
+#ifndef QUEUE_ARRAY_CPP
+#define QUEUE_ARRAY_CPP
 #include "queuearray.h"
 
 template<class ItemType>
@@ -70,3 +72,4 @@ ItemType QueueArray<ItemType>::peekFront() const {
     else
         return queue[frontIndex];
 }
+#endif

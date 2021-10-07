@@ -14,6 +14,7 @@ public:
     PQueueArray(const PQueueArray& oldQueue);
     bool isEmpty() const;
     bool isFull() const;
+    bool add(const ItemType& newEntry);
     bool enqueue(const ItemType& newEntry);
     bool dequeue();
     ItemType peekFront() const;

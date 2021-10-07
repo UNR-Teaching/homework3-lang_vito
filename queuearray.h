@@ -4,8 +4,9 @@
 
 template <class ItemType>
 class QueueArray : public QueueInterface<ItemType> {
+private:
     static const int DEFAULT_SIZE = 50;
-    int frontIndex, backIndex, itemCount;
+    int frontIndex, backIndex, itemCount, maxSize;
     ItemType queue[DEFAULT_SIZE];
 public:
     QueueArray();
