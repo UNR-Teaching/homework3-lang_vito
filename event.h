@@ -17,6 +17,9 @@ public:
     void setArrivalTime(int newATime);
     void setProcessTime(int newPTime);
     void setEventType(bool event);
+
+    bool operator<=(const Event& compareEvent);
+    bool operator>(const Event& compareEvent);
 };
 #include "event.cpp"
 #endif
