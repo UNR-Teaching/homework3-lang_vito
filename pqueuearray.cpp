@@ -1,18 +1,26 @@
 #include "pqueuearray.h"
 
+template<class ItemType>
+PQueueArray<ItemType>::PQueueArray() {
+    itemCount = frontIndex = backIndex = 0;
+}
+
+template<class ItemType>
 PQueueArray<ItemType>::PQueueArray(int newSize) {
     itemCount = frontIndex = backIndex = 0;
     maxSize = newSize;
 }
 
+template<class ItemType>
 PQueueArray<ItemType>::PQueueArray(const PQueueArray& oldQueue) {
     frontIndex = oldQueue.frontIndex;
     while (!oldQueue.isEmpty()) {
-        PQueueArray.enqueue(oldQueue.peekFront());
+        enqueue(oldQueue.peekFront());
         oldQueue.dequeue();
     }
 }
 
+template<class ItemType>
 bool PQueueArray<ItemType>::isEmpty() const {
     if (itemCount == 0)
         return true;
@@ -20,6 +28,7 @@ bool PQueueArray<ItemType>::isEmpty() const {
         return false;
 }
 
+template<class ItemType>
 bool PQueueArray<ItemType>::isFull() const {
     if (itemCount == maxSize)
         return true;
@@ -27,9 +36,10 @@ bool PQueueArray<ItemType>::isFull() const {
         return false;
 }
 
+template<class ItemType>
 bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
     if (!isFull()) {
-        PQueueArray[++backIndex] = newEntry;
+        queue[++backIndex] = newEntry;
         itemCount++;
         return true;
     }
@@ -37,12 +47,14 @@ bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
         return false;
     }
 }
+
+template<class ItemType>
 bool PQueueArray<ItemType>::dequeue() {
     if (isEmpty()) {
         return false;
     }
     else {
-        // delete person at frontIndex
+        ~queue[frontIndex];
         frontIndex++;
         itemCount--;
         return true;
@@ -55,5 +67,5 @@ ItemType PQueueArray<ItemType>::peekFront() const {
         // return null or error
     }
     else
-        return PQueueArray[frontIndex];
+        return queue[frontIndex];
 }
