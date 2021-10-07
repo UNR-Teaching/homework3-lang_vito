@@ -1,31 +1,38 @@
-#ifndef PERSON
-#define PERSON
+#ifndef PERSON_CPP
+#define PERSON_CPP
 #include "person.h"
 
-Person::Person() {
-    arrivalTime = 0;
-    processTime = 0;
+Person::Person() : waitTime(0), processTime(0), arrivalTime(0) {}
+
+Person::Person(int waitTime, int processTime, int arrivalTime) : waitTime(waitTime), processTime(processTime), arrivalTime(arrivalTime) {}
+
+int Person::getWaitTime() const
+{
+    return waitTime;
 }
 
-Person::Person(int newArrival, int newProcess) {
-    arrivalTime = newArrival;
-    processTime = newProcess;
-}
-
-int Person::getArrivalTime() const {
-    return arrivalTime;
-}
-
-int Person::getProcessTime() const {
+int Person::getProcessTime() const
+{
     return processTime;
 }
 
-void Person::setArrivalTime(int newATime) {
-    arrivalTime = newATime;
+int Person::getArrivalTime() const
+{
+    return arrivalTime;
 }
 
-void Person::setProcessTime(int newPTime) {
-    processTime = newPTime;
+void Person::setWaitTime(int waitTime)
+{
+    this->waitTime = waitTime;
 }
 
+void Person::setProcessTime(int processTime)
+{
+    this->processTime = processTime;
+}
+
+void Person::setArrivalTime(int arrivalTime)
+{
+    this->arrivalTime = arrivalTime;
+}
 #endif

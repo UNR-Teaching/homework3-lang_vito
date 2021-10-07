@@ -1,5 +1,8 @@
 #include "pqueuearray.h"
 
+template <class ItemType>
+PQueueArray<ItemType>::PQueueArray() : itemCount(0), maxSize(DEFAULT_SIZE), frontIndex(0), backIndex(0) {}
+
 template<class ItemType>
 PQueueArray<ItemType>::PQueueArray() {
     itemCount = frontIndex = backIndex = 0;

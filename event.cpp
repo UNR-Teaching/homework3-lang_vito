@@ -1,9 +1,11 @@
 #ifndef EVENT_CPP
 #define EVENT_CPP
 
-Event::Event() : arrivalTime(0), processTime(0), isArrival(true){}
+#include "event.h"
 
-Event::Event(int arrivalTime, int processTime, bool isArrival) : arrivalTime(arrivalTime), processTime(processTime), isArrival(isArrival){}
+Event::Event() : arrivalTime(0), processTime(0), departureTime(0), isArrival(true){}
+
+Event::Event(int arrivalTime, int processTime, int departureTime, bool isArrival) : arrivalTime(arrivalTime), processTime(processTime), departureTime(departureTime), isArrival(isArrival){}
 
 int Event::getArrivalTime() const{
     return arrivalTime;
@@ -11,6 +13,10 @@ int Event::getArrivalTime() const{
 
 int Event::getProcessTime() const{
     return processTime;
+}
+
+int Event::getDepartureTime() const{
+    return departureTime;
 }
 
 bool Event::getEventType() const{
@@ -23,6 +29,10 @@ void Event::setArrivalTime(int newATime) {
 
 void Event::setProcessTime(int newPTime) {
     processTime = newPTime;
+}
+
+void Event::setDepartureTime(int newDTime){
+    departureTime = newDTime;
 }
 
 void Event::setEventType(bool event){

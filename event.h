@@ -5,18 +5,21 @@
 class Event {
     int arrivalTime;
     int processTime;
+    int departureTime;
     bool isArrival;
 
 public:
     Event();
-    Event(int arrivalTime, int processTime, bool isArrival);
+    Event(int arrivalTime, int processTime, int departureTime, bool isArrival);
     int getArrivalTime() const;
     int getProcessTime() const;
+    int getDepartureTime() const;
     bool getEventType() const;
 
     void setArrivalTime(int newATime);
     void setProcessTime(int newPTime);
+    void setDepartureTime(int newDTime);
     void setEventType(bool event);
 };
-#include "event.cpp"
+
 #endif

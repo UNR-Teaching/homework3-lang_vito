@@ -9,6 +9,7 @@ private:
     int itemCount, maxSize, frontIndex, backIndex;
     ItemType queue[DEFAULT_SIZE];
 public:
+    PQueueArray();
     PQueueArray(int newSize);
     PQueueArray(const PQueueArray& oldQueue);
     bool isEmpty() const;

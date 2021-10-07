@@ -5,54 +5,78 @@
 #include "person.h"
 #include "pqueuearray.h"
 
+bool tellerAvailable = true;
+int currTime = 0;
+
 void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, PQueueArray<Person> &bankLine)
 {
+    Person customer(0, eventList.peekFront().getProcessTime(), eventList.peekFront().getArrivalTime());
+    int departureTime;
     eventList.dequeue();
 
-    
-
+    if (bankLine.isEmpty() && tellerAvailable)
+    {
+        departureTime = currTime + arrivalEvent.getProcessTime();
+        Event departureEvent(0, 0, departureTime, false);
+        eventList.enqueue(departureEvent);
+        tellerAvailable = false;
+    }
+    else
+    {
+        bankLine.enqueue(customer);
+    }
 }
 
-void processDeparture()
+void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQueueArray<Person> &bankLine)
 {
+    int departureTime;
+    Person customer;
+    eventList.dequeue();
 
+    if (!bankLine.isEmpty())
+    {
+        customer = bankLine.peekFront();
+
+        bankLine.dequeue();
+        departureTime = currTime + customer.getProcessTime();
+        Event newDepartureEvent(0, 0, departureTime, false);
+        eventList.enqueue(newDepartureEvent);
+    }
+    else
+    {
+        tellerAvailable = true;
+    }
 }
-
 
 int main()
 {
-
     std::ifstream inputFile;
-    int arrivalTime = 0, processTime = 0, currTime = 0, nextAvailableTime = 0;
-    //Person customer;
-    PQueueArray<Event> eventList;
+    int arrivalTime = 0, processTime = 0, nextAvailableTime = 0;
     PQueueArray<Person> bankLine;
+    PQueueArray<Event> eventList;
 
     inputFile.open("inputfile.txt");
 
-    while(inputFile >> arrivalTime >> processTime)
+    while (inputFile >> arrivalTime >> processTime)
     {
-        Event arrivalEvent(arrivalTime, processTime, true);
+        Event arrivalEvent(arrivalTime, processTime, 0, true);
         eventList.enqueue(arrivalEvent);
     }
 
-    while(!eventList.isEmpty())
+    while (!eventList.isEmpty())
     {
         Event event = eventList.peekFront();
-        currTime = event.getArrivalTime();
+        currTime = event.getArrivalTime() + event.getDepartureTime();
 
-        if(event.getEventType() == true) //if event is an arrival
+        if (event.getEventType() == true) //if event is an arrival
         {
             processArrival(event, eventList, bankLine);
         }
         else
         {
-            //processDeparture();
+            processDeparture(event, eventList, bankLine);
         }
-
     }
-    
-
 
     return 0;
 }
