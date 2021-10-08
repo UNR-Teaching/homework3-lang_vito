@@ -40,7 +40,7 @@ void Event::setEventType(bool event){
 }
 
 bool Event::operator<=(const Event& compareEvent) {
-    if (arrivalTime =< compareEvent.arrivalTime)
+    if (arrivalTime <= compareEvent.arrivalTime)
         return true;
     else
         return false;

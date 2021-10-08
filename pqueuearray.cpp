@@ -1,12 +1,9 @@
+#ifndef P_QUEUE_ARRAY_CPP
+#define P_QUEUE_ARRAY_CPP
 #include "pqueuearray.h"
 
 template <class ItemType>
-PQueueArray<ItemType>::PQueueArray() : itemCount(0), maxSize(DEFAULT_SIZE), frontIndex(0), backIndex(0) {}
-
-template<class ItemType>
-PQueueArray<ItemType>::PQueueArray() {
-    itemCount = frontIndex = backIndex = 0;
-}
+PQueueArray<ItemType>::PQueueArray() : itemCount(0), maxSize(DEFAULT_SIZE), frontIndex(0), backIndex(0) { }
 
 template<class ItemType>
 PQueueArray<ItemType>::PQueueArray(int newSize) {
@@ -46,8 +43,14 @@ bool PQueueArray<ItemType>::add(const ItemType& newEntry) {
 
 template<class ItemType>
 bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
+    if (isEmpty()) {
+        queue[backIndex] = newEntry;
+        backIndex++;
+        itemCount++;
+        return true;
+    }
     if (!isFull()) {
-        for (int i = 0, i < itemCount; i++) {
+        for (int i = 0; i < itemCount; i++) {
             if (newEntry <= queue[i]) {
                 ItemType tempEntry = queue[i];
                 queue[i] = newEntry;
@@ -61,20 +64,11 @@ bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
             }
         }
         itemCount++;
+
+        return true;
     }
     else
         return false;
-    
-    /*
-    if (!isFull()) {
-        queue[++backIndex] = newEntry;
-        itemCount++;
-        return true;
-    }
-    else {
-        return false;
-    }
-    */
 }
 
 template<class ItemType>
@@ -98,3 +92,4 @@ ItemType PQueueArray<ItemType>::peekFront() const {
     else
         return queue[frontIndex];
 }
+#endif

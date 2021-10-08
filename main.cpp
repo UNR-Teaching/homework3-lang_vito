@@ -4,6 +4,9 @@
 #include "event.h"
 #include "person.h"
 #include "pqueuearray.h"
+#include "pqueuearray.cpp"
+#include "queuearray.h"
+#include "queuearray.cpp"
 
 bool tellerAvailable = true;
 int currTime = 0;
@@ -55,6 +58,15 @@ void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQue
         tellerAvailable = true;
     }
 }
+
+/*
+int main() {
+    PQueueArray<char> testQueue;
+    //QueueArray<char> testQueue;
+    testQueue.enqueue('q');
+    std::cout << "front of testQueue: " << testQueue.peekFront() << std::endl;
+}
+*/
 
 int main()
 {

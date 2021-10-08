@@ -18,6 +18,8 @@ public:
     void setProcessTime(int processTime);
     void setWaitTime(int waitTime);
     void setArrivalTime(int arrivalTime);
+
+    ~Person() { }
 };
 
 #endif
