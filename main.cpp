@@ -7,11 +7,15 @@
 
 bool tellerAvailable = true;
 int currTime = 0;
+int totalWaitTime = 0, numCustomers = 0;
+double avgWait = 0;
 
 void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, PQueueArray<Person> &bankLine)
 {
     Person customer(0, eventList.peekFront().getProcessTime(), eventList.peekFront().getArrivalTime());
     int departureTime;
+
+    std::cout << "Processing an arrival event at time: " << eventList.peekFront().getArrivalTime() << std::endl;
     eventList.dequeue();
 
     if (bankLine.isEmpty() && tellerAvailable)
@@ -31,13 +35,17 @@ void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQue
 {
     int departureTime;
     Person customer;
+
+    std::cout << "Processing a departure event at time: " << eventList.peekFront().getDepartureTime() << std::endl;
     eventList.dequeue();
 
     if (!bankLine.isEmpty())
     {
         customer = bankLine.peekFront();
 
-        bankLine.dequeue();
+        totalWaitTime += currTime - customer.getArrivalTime();
+
+        bankLine.dequeue(); //dequeue this customer since they are now being served
         departureTime = currTime + customer.getProcessTime();
         Event newDepartureEvent(0, 0, departureTime, false);
         eventList.enqueue(newDepartureEvent);
@@ -51,7 +59,7 @@ void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQue
 int main()
 {
     std::ifstream inputFile;
-    int arrivalTime = 0, processTime = 0, nextAvailableTime = 0;
+    int arrivalTime = 0, processTime = 0;
     PQueueArray<Person> bankLine;
     PQueueArray<Event> eventList;
 
@@ -61,6 +69,7 @@ int main()
     {
         Event arrivalEvent(arrivalTime, processTime, 0, true);
         eventList.enqueue(arrivalEvent);
+        numCustomers++;
     }
 
     while (!eventList.isEmpty())
@@ -77,6 +86,8 @@ int main()
             processDeparture(event, eventList, bankLine);
         }
     }
+
+    avgWait = totalWaitTime / numCustomers;
 
     return 0;
 }
