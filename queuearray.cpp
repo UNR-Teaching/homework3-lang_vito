@@ -41,7 +41,8 @@ bool QueueArray<ItemType>::isFull() const {
 template<class ItemType>
 bool QueueArray<ItemType>::enqueue(const ItemType& newEntry) {
     if (!isFull()) {
-        queue[++backIndex] = newEntry;
+        queue[backIndex] = newEntry;
+        backIndex++;
         itemCount++;
         return true;
     }

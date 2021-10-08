@@ -43,6 +43,12 @@ bool PQueueArray<ItemType>::add(const ItemType& newEntry) {
 
 template<class ItemType>
 bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
+    if (isEmpty()) {
+        queue[backIndex] = newEntry;
+        backIndex++;
+        itemCount++;
+        return true;
+    }
     if (!isFull()) {
         for (int i = 0; i < itemCount; i++) {
             if (newEntry <= queue[i]) {
@@ -58,20 +64,11 @@ bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
             }
         }
         itemCount++;
+
+        return true;
     }
     else
         return false;
-    
-    /*
-    if (!isFull()) {
-        queue[++backIndex] = newEntry;
-        itemCount++;
-        return true;
-    }
-    else {
-        return false;
-    }
-    */
 }
 
 template<class ItemType>
