@@ -1,7 +1,7 @@
 bankline: bankline.o person.o event.o
-	g++ bankline.o person.o -o bankline
+	g++ bankline.o person.o event.o -o bankline
 
-bankline.o: main.cpp pqueuearray.h pqueuearray.h queuearray.h queuearray.cpp
+bankline.o: main.cpp pqueuearray.h queuearray.h
 	g++ -c -std=c++11 main.cpp -o bankline.o
 
 person.o: person.cpp person.h

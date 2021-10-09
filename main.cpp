@@ -4,9 +4,7 @@
 #include "event.h"
 #include "person.h"
 #include "pqueuearray.h"
-#include "pqueuearray.cpp"
 #include "queuearray.h"
-#include "queuearray.cpp"
 
 bool tellerAvailable = true;
 int currTime = 0;

@@ -1,5 +1,7 @@
 #ifndef P_QUEUE_ARRAY_CPP
 #define P_QUEUE_ARRAY_CPP
+
+#include <iostream>
 #include "pqueuearray.h"
 
 template <class ItemType>
@@ -86,11 +88,25 @@ bool PQueueArray<ItemType>::dequeue() {
 
 template<class ItemType>
 ItemType PQueueArray<ItemType>::peekFront() const {
+    try
+    {
+        if(isEmpty())
+        {
+            throw std::string("Invalid");
+        }
+
+        return queue[frontIndex];
+    }
+    catch(std::string &e)
+    {
+        std::cout << e << std::endl;
+    }
+    /*
     if (isEmpty()) {
-        return NULL;
+        return '\0';
     }
     else
-        return queue[frontIndex];
+        return queue[frontIndex]; */
 }
 
 template<class ItemType>

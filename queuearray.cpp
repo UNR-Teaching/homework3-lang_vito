@@ -63,11 +63,19 @@ bool QueueArray<ItemType>::dequeue() {
 
 template<class ItemType>
 ItemType QueueArray<ItemType>::peekFront() const {
-    if (isEmpty()) {
-        return NULL;
-    }
-    else
+    try
+    {
+        if(isEmpty())
+        {
+            throw std::string("Invalid");
+        }
+
         return queue[frontIndex];
+    }
+    catch(std::string &e)
+    {
+        std::cout << e << std::endl;
+    }
 }
 
 template<class ItemType>

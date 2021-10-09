@@ -20,4 +20,6 @@ public:
     ItemType peekFront() const;
     ~PQueueArray();
 };
+
+#include "pqueuearray.cpp"
 #endif
