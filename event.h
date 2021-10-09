@@ -21,8 +21,10 @@ public:
     void setDepartureTime(int newDTime);
     void setEventType(bool event);
 
-    bool operator<=(const Event& compareEvent);
-    bool operator>(const Event& compareEvent);
+    bool operator<=(const Event& compareEvent) const;
+    bool operator>(const Event& compareEvent) const;
+    bool operator<(const Event& compareEvent) const;
+    bool operator==(const Event& compareEvent) const;
 };
 
 #endif
