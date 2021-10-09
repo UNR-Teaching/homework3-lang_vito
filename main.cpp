@@ -11,7 +11,7 @@
 bool tellerAvailable = true;
 int currTime = 0;
 
-void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, PQueueArray<Person> &bankLine)
+void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, QueueArray<Person> &bankLine)
 {
     Person customer(0, eventList.peekFront().getProcessTime(), eventList.peekFront().getArrivalTime());
     int departureTime;
@@ -30,7 +30,7 @@ void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, PQueueAr
     }
 }
 
-void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQueueArray<Person> &bankLine)
+void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, QueueArray<Person> &bankLine)
 {
     int departureTime;
     Person customer;
@@ -53,9 +53,21 @@ void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQue
 
 /*
 int main() {
-    PQueueArray<char> testQueue;
-    //QueueArray<char> testQueue;
-    testQueue.enqueue('q');
+    //PQueueArray<int> testQueue;
+    QueueArray<char> testQueue;
+    testQueue.enqueue(5);
+    testQueue.enqueue(2);
+    testQueue.enqueue(30);
+    testQueue.enqueue(50);
+    testQueue.enqueue(10);
+    std::cout << "front of testQueue: " << testQueue.peekFront() << std::endl;
+    testQueue.dequeue();
+    std::cout << "front of testQueue: " << testQueue.peekFront() << std::endl;
+    testQueue.dequeue();
+    std::cout << "front of testQueue: " << testQueue.peekFront() << std::endl;
+    testQueue.dequeue();
+    std::cout << "front of testQueue: " << testQueue.peekFront() << std::endl;
+    testQueue.dequeue();
     std::cout << "front of testQueue: " << testQueue.peekFront() << std::endl;
 }
 */
@@ -64,7 +76,7 @@ int main()
 {
     std::ifstream inputFile;
     int arrivalTime = 0, processTime = 0, nextAvailableTime = 0;
-    PQueueArray<Person> bankLine;
+    QueueArray<Person> bankLine;
     PQueueArray<Event> eventList;
 
     inputFile.open("inputfile.txt");
