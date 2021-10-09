@@ -3,9 +3,7 @@
 #include "queuearray.h"
 
 template<class ItemType>
-QueueArray<ItemType>::QueueArray() {
-    itemCount = frontIndex = backIndex = 0;
-}
+QueueArray<ItemType>::QueueArray() : itemCount(0), frontIndex(0), backIndex(0), maxSize(DEFAULT_SIZE) { }
 
 template<class ItemType>
 QueueArray<ItemType>::QueueArray(int newSize) {
@@ -57,7 +55,6 @@ bool QueueArray<ItemType>::dequeue() {
         return false;
     }
     else {
-        ~queue[frontIndex];
         frontIndex++;
         itemCount--;
         return true;
@@ -67,10 +64,16 @@ bool QueueArray<ItemType>::dequeue() {
 template<class ItemType>
 ItemType QueueArray<ItemType>::peekFront() const {
     if (isEmpty()) {
-        // return null or error
         return NULL;
     }
     else
         return queue[frontIndex];
+}
+
+template<class ItemType>
+QueueArray<ItemType>::~QueueArray() {
+    while(!isEmpty()) {
+        dequeue();
+    }
 }
 #endif

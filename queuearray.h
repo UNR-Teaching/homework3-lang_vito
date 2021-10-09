@@ -17,7 +17,7 @@ public:
     bool enqueue(const ItemType& newEntry);
     bool dequeue();
     ItemType peekFront() const;
-    ~QueueArray() { }
+    ~QueueArray();
 
 };
 
