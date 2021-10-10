@@ -82,7 +82,7 @@ int main()
         numCustomers++;
     }
 
-    std::cout << "Sumulation output: " << std::endl;
+    std::cout << "Sumulation output: \n" << std::endl;
 
     while (!eventList.isEmpty())
     {
@@ -101,7 +101,7 @@ int main()
 
     avgWait = double(totalWaitTime) / double(numCustomers);
 
-    std::cout << "Statistics at simulation finish: " << std::endl;
+    std::cout << "\nStatistics at simulation finish: " << std::endl;
     std::cout << "Average wait time: " << avgWait << std::endl;
     std::cout << "Number of customers processed: " << numCustomers << std::endl;
 
