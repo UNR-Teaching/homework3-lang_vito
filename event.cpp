@@ -1,6 +1,7 @@
 #ifndef EVENT_CPP
 #define EVENT_CPP
 
+#include <iostream>
 #include "event.h"
 
 Event::Event() : arrivalTime(0), processTime(0), departureTime(0), isArrival(true){}
@@ -48,7 +49,10 @@ bool Event::operator<(const Event& compareEvent) const {
 }
 
 bool Event::operator<=(const Event& compareEvent) const {
-    return arrivalTime <= compareEvent.arrivalTime;
+    if (isArrival == 0)
+        return departureTime <= compareEvent.arrivalTime;
+    else
+        return arrivalTime <= compareEvent.arrivalTime;
 }
 
 bool Event::operator>(const Event& compareEvent) const {
