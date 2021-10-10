@@ -99,7 +99,7 @@ int main()
         }
     }
 
-    avgWait = totalWaitTime / numCustomers;
+    avgWait = double(totalWaitTime) / double(numCustomers);
 
     std::cout << "Statistics at simulation finish: " << std::endl;
     std::cout << "Average wait time: " << avgWait << std::endl;
