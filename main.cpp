@@ -6,17 +6,27 @@
 #include "pqueuearray.h"
 #include "queuearray.h"
 
+//global variables
 bool tellerAvailable = true;
 int currTime = 0;
-int totalWaitTime = 0, numCustomers = 0;
-double avgWait = 0;
+int totalWaitTime = 0;
 
 void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, QueueArray<Person> &bankLine)
 {
     Person customer(0, eventList.peekFront().getProcessTime(), eventList.peekFront().getArrivalTime());
     int departureTime;
+    static bool isFirstEvent = true;
 
-    std::cout << "Processing an arrival event at time: " << eventList.peekFront().getArrivalTime() << std::endl;
+    if (isFirstEvent)
+    {
+        std::cout << "Simulation Begins Processing an arrival event at time: " << currTime << std::endl;
+        isFirstEvent = false;
+    }
+    else
+    {
+        std::cout << "Processing an arrival event at time: " << eventList.peekFront().getArrivalTime() << std::endl;
+    }
+
     eventList.dequeue();
 
     if (bankLine.isEmpty() && tellerAvailable)
@@ -59,12 +69,11 @@ void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, Queu
 
 int main()
 {
-    std::ifstream inputFile;
-    int arrivalTime = 0, processTime = 0, nextAvailableTime = 0;
+    std::ifstream inputFile("inputfile.txt");
+    int arrivalTime = 0, processTime = 0, nextAvailableTime = 0, numCustomers = 0;
+    double avgWait = 0;
     QueueArray<Person> bankLine;
     PQueueArray<Event> eventList;
-
-    inputFile.open("inputfile.txt");
 
     while (inputFile >> arrivalTime >> processTime)
     {
@@ -72,6 +81,8 @@ int main()
         eventList.enqueue(arrivalEvent);
         numCustomers++;
     }
+
+    std::cout << "Sumulation output: " << std::endl;
 
     while (!eventList.isEmpty())
     {
@@ -90,44 +101,9 @@ int main()
 
     avgWait = totalWaitTime / numCustomers;
 
+    std::cout << "Statistics at simulation finish: " << std::endl;
     std::cout << "Average wait time: " << avgWait << std::endl;
     std::cout << "Number of customers processed: " << numCustomers << std::endl;
 
     return 0;
 }
-
-// if (!line.isFull() && currTime == 0) //First time the loop happens
-// {
-//     customer.setArrivalTime(arrivalTime);
-//     customer.setProcessTime(processTime);
-//     line.enqueue(customer);
-//     nextAvailableTime = line.peekFront().getArrivalTime() + line.peekFront().getProcessTime();
-//     std::cout << "Simulation Begins Processing an arrival event at time: " << line.peekFront().getArrivalTime() << std::endl;
-// }
-// if (!line.isFull() && arrivalTime < nextAvailableTime)
-// {
-//     customer.setArrivalTime(arrivalTime);
-//     customer.setProcessTime(processTime);
-//     line.enqueue(customer);
-//     std::cout << "Processing an arrival event at time: " << line.peekFront().getArrivalTime();
-// }
-// else if (!line.isFull() && arrivalTime >= nextAvailableTime)
-// {
-//     while (arrivalTime >= nextAvailableTime && line.isEmpty() == false)
-//     {
-//         std::cout << "Processing a departure event at time: " << nextAvailableTime << std::endl;
-//         line.dequeue();
-//         if (line.isEmpty())
-//         {
-//             break;
-//         }
-//         else
-//         {
-//             nextAvailableTime += line.peekFront().getProcessTime();
-//         }
-//     }
-//     customer.setArrivalTime(arrivalTime);
-//     customer.setProcessTime(processTime);
-//     line.enqueue(customer);
-//     std::cout << "Processing an arrival event at time: " << line.peekFront().getArrivalTime();
-// }
