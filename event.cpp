@@ -39,17 +39,19 @@ void Event::setEventType(bool event){
     isArrival = event;
 }
 
-bool Event::operator<=(const Event& compareEvent) {
-    if (arrivalTime <= compareEvent.arrivalTime)
-        return true;
-    else
-        return false;
+bool Event::operator==(const Event& compareEvent) const {
+    return arrivalTime == compareEvent.arrivalTime;
 }
 
-bool Event::operator>(const Event& compareEvent) {
-    if (arrivalTime > compareEvent.arrivalTime)
-        return true;
-    else
-        return false;
+bool Event::operator<(const Event& compareEvent) const {
+    return arrivalTime < compareEvent.arrivalTime;
+}
+
+bool Event::operator<=(const Event& compareEvent) const {
+    return arrivalTime <= compareEvent.arrivalTime;
+}
+
+bool Event::operator>(const Event& compareEvent) const {
+    return arrivalTime > compareEvent.arrivalTime;
 }
 #endif

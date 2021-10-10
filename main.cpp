@@ -4,16 +4,14 @@
 #include "event.h"
 #include "person.h"
 #include "pqueuearray.h"
-#include "pqueuearray.cpp"
 #include "queuearray.h"
-#include "queuearray.cpp"
 
 bool tellerAvailable = true;
 int currTime = 0;
 int totalWaitTime = 0, numCustomers = 0;
 double avgWait = 0;
 
-void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, PQueueArray<Person> &bankLine)
+void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, QueueArray<Person> &bankLine)
 {
     Person customer(0, eventList.peekFront().getProcessTime(), eventList.peekFront().getArrivalTime());
     int departureTime;
@@ -34,7 +32,7 @@ void processArrival(Event &arrivalEvent, PQueueArray<Event> &eventList, PQueueAr
     }
 }
 
-void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQueueArray<Person> &bankLine)
+void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, QueueArray<Person> &bankLine)
 {
     int departureTime;
     Person customer;
@@ -59,20 +57,11 @@ void processDeparture(Event &departureEvent, PQueueArray<Event> &eventList, PQue
     }
 }
 
-/*
-int main() {
-    PQueueArray<char> testQueue;
-    //QueueArray<char> testQueue;
-    testQueue.enqueue('q');
-    std::cout << "front of testQueue: " << testQueue.peekFront() << std::endl;
-}
-*/
-
 int main()
 {
     std::ifstream inputFile;
-    int arrivalTime = 0, processTime = 0;
-    PQueueArray<Person> bankLine;
+    int arrivalTime = 0, processTime = 0, nextAvailableTime = 0;
+    QueueArray<Person> bankLine;
     PQueueArray<Event> eventList;
 
     inputFile.open("inputfile.txt");

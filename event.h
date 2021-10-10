@@ -25,6 +25,10 @@ public:
 
     bool operator<=(const Event& compareEvent);
     bool operator>(const Event& compareEvent);
+    bool operator<=(const Event& compareEvent) const;
+    bool operator>(const Event& compareEvent) const;
+    bool operator<(const Event& compareEvent) const;
+    bool operator==(const Event& compareEvent) const;
 };
 
 #endif
