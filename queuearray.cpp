@@ -30,7 +30,7 @@ bool QueueArray<ItemType>::isFull() const {
 template<class ItemType>
 bool QueueArray<ItemType>::enqueue(const ItemType& newEntry) {
     if (!isFull()) {
-        queue[backIndex] = newEntry;
+        queue[toCircIndex(backIndex)] = newEntry;
         backIndex++;
         itemCount++;
         return true;
@@ -53,6 +53,11 @@ bool QueueArray<ItemType>::dequeue() {
 } // ends dequeue
 
 template<class ItemType>
+int QueueArray<ItemType>::toCircIndex(int index) const {
+    return index % maxSize;
+}
+
+template<class ItemType>
 ItemType QueueArray<ItemType>::peekFront() const {
     try
     {
@@ -61,7 +66,7 @@ ItemType QueueArray<ItemType>::peekFront() const {
             throw std::string("Invalid");
         }
 
-        return queue[frontIndex];
+        return queue[toCircIndex(frontIndex)];
     }
     catch(std::string &e)
     {
@@ -75,4 +80,5 @@ QueueArray<ItemType>::~QueueArray() {
         dequeue();
     }
 } // ends destructor
+
 #endif

@@ -18,6 +18,7 @@ public:
     bool isFull() const;
     bool enqueue(const ItemType &newEntry);
     bool dequeue();
+    int toCircIndex(int index) const;
     ItemType peekFront() const;
     ~QueueArray();
 };
