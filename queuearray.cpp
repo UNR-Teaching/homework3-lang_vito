@@ -6,10 +6,7 @@ template<class ItemType>
 QueueArray<ItemType>::QueueArray() : itemCount(0), frontIndex(0), backIndex(0), maxSize(DEFAULT_SIZE) { }
 
 template<class ItemType>
-QueueArray<ItemType>::QueueArray(int newSize) {
-    itemCount = frontIndex = backIndex = 0;
-    maxSize = newSize;
-}
+QueueArray<ItemType>::QueueArray(int newSize) : maxSize(newSize), itemCount(0), frontIndex(0), backIndex(0) {}
 
 template<class ItemType>
 QueueArray<ItemType>::QueueArray(const QueueArray& oldQueue) {
