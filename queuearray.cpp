@@ -15,23 +15,17 @@ QueueArray<ItemType>::QueueArray(const QueueArray& oldQueue) {
         enqueue(oldQueue.peekFront());
         oldQueue.dequeue();
     }
-}
+} // ends copy constructor
 
 template<class ItemType>
 bool QueueArray<ItemType>::isEmpty() const {
-    if (itemCount == 0)
-        return true;
-    else
-        return false;
-}
+    return itemCount == 0;
+} // ends isEmpty
 
 template<class ItemType>
 bool QueueArray<ItemType>::isFull() const {
-    if (itemCount == maxSize)
-        return true;
-    else
-        return false;
-}
+    return itemCount == maxSize;
+} // ends isFull
 
 template<class ItemType>
 bool QueueArray<ItemType>::enqueue(const ItemType& newEntry) {
@@ -44,7 +38,7 @@ bool QueueArray<ItemType>::enqueue(const ItemType& newEntry) {
     else {
         return false;
     }
-}
+} // ends enqueue
 
 template<class ItemType>
 bool QueueArray<ItemType>::dequeue() {
@@ -56,7 +50,7 @@ bool QueueArray<ItemType>::dequeue() {
         itemCount--;
         return true;
     }
-}
+} // ends dequeue
 
 template<class ItemType>
 ItemType QueueArray<ItemType>::peekFront() const {
@@ -73,12 +67,12 @@ ItemType QueueArray<ItemType>::peekFront() const {
     {
         std::cout << e << std::endl;
     }
-}
+} // ends peekFront
 
 template<class ItemType>
 QueueArray<ItemType>::~QueueArray() {
     while(!isEmpty()) {
         dequeue();
     }
-}
+} // ends destructor
 #endif

@@ -49,15 +49,18 @@ bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
     using QueueArray<ItemType>::frontIndex, QueueArray<ItemType>::backIndex, 
     QueueArray<ItemType>::itemCount, QueueArray<ItemType>::maxSize;
     if (isEmpty()) {
+        // adds newEntry to the front if no other items present
         queue[this->frontIndex] = newEntry;
         backIndex++;
         itemCount++;
         return true;
-    }
+    } // ends if
     else if (!isFull()) {
+        // iterates through queue to find a value newEntry is less than/equal to
         for (int i = frontIndex; i <= backIndex; i++) {
             if (newEntry <= queue[i]) {
                 for (int j = backIndex+1; j > i; j--) {
+                    // iterates from back + 1 until i to shift items down
                     queue[j] = queue[j-1];
                 }
                 queue[i] = newEntry;
@@ -70,7 +73,7 @@ bool PQueueArray<ItemType>::enqueue(const ItemType& newEntry) {
         backIndex++;
         itemCount++;
         return true;
-    }
+    } // ends else if
 
 
     else

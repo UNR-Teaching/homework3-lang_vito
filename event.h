@@ -23,6 +23,7 @@ public:
 
     ~Event() {}
 
+    // operator overloads
     bool operator<=(const Event& compareEvent);
     bool operator>(const Event& compareEvent);
     bool operator<=(const Event& compareEvent) const;
